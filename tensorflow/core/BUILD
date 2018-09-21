@@ -2462,7 +2462,6 @@ tf_cuda_library(
 
 cc_header_only_library(
     name = "framework_internal_headers_lib",
-    includes = ["../../external/com_google_absl"],
     deps = [
         ":lib",
         ":lib_internal",
@@ -2470,6 +2469,7 @@ cc_header_only_library(
         "//tensorflow/core/kernels:bounds_check",
         "//tensorflow/core/platform/default/build_config:platformlib",
     ],
+    extra_deps = ["@com_google_absl//absl/strings", "@com_google_absl//absl/types:span"],
 )
 
 cc_header_only_library(
@@ -2547,11 +2547,7 @@ tf_cuda_library(
 
 cc_header_only_library(
     name = "framework_headers_lib",
-    extra_deps = [
-        # ABSL headers get dropped, so we add them back here.
-        "@com_google_absl//absl/strings",
-    ],
-    includes = ["../../external/com_google_absl"],
+    extra_deps = ["@com_google_absl//absl/strings", "@com_google_absl//absl/types:span"],
     visibility = ["//visibility:public"],
     deps = [
         ":framework",
@@ -2561,8 +2557,8 @@ cc_header_only_library(
 
 cc_header_only_library(
     name = "stream_executor_headers_lib",
-    includes = ["../../external/com_google_absl"],
     visibility = ["//visibility:public"],
+    extra_deps = ["@com_google_absl//absl/strings", "@com_google_absl//absl/types:span"],
     deps = [
         ":stream_executor",
     ],

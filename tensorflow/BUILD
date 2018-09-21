@@ -532,6 +532,7 @@ tf_cc_shared_object(
 
 tf_cc_shared_object(
     name = "libtensorflow.so",
+    visibility = ["//visibility:public"],
     linkopts = select({
         "//tensorflow:darwin": [
             "-Wl,-exported_symbols_list",  # This line must be directly followed by the exported_symbols.lds file
@@ -569,6 +570,7 @@ tf_cc_shared_object(
             "$(location //tensorflow:tf_version_script.lds)",
         ],
     }),
+    visibility = ["//visibility:public"],
     deps = [
         "//tensorflow:tf_exported_symbols.lds",
         "//tensorflow:tf_version_script.lds",
